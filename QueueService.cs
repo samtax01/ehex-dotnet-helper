@@ -11,22 +11,24 @@ using JsonSerializer = System.Text.Json.JsonSerializer;
 namespace Ehex.Helpers
 {
   
-    /// <summary>
-    /// @Version: 1.0
-    /// @Author:  Samson Oyetola [hello@samsonoyetola.com]
-    /// Usage
-    /// <br/>
-    /// Add to Startup
-    ///     services.AddScoped[IQueueService, QueueService](); 
-    /// </summary>
-    
     public interface IQueueService
     {
         Task SendMessage<T>(T messageObject, string url, string entityPath);
         void ReceiveMessage<T>(Func<T, Task> callBackMethod, string url, string entityPath);
         
     }
-
+    
+    
+    /// <summary>
+    /// Helper Class
+    /// @version: 1.0
+    /// @creator: Samson Oyetola [hello@samsonoyetola.com]
+    /// @repo: https://github.com/samtax01/ehex-dotnet-helper
+    /// Usage
+    /// <br/>
+    /// Add to Startup
+    ///     services.AddScoped[IQueueService, QueueService](); 
+    /// </summary>
     public class QueueService : IQueueService
     {
         

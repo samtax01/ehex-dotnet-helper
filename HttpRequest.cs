@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 // ReSharper disable once CheckNamespace
 namespace Ehex.Helpers
 {
+
     public enum HttpRequestType
     {
         Get,
@@ -15,8 +16,10 @@ namespace Ehex.Helpers
     }
     
     /// <summary>
-    /// @Version: 1.0
-    /// @Author:  Samson Oyetola [hello@samsonoyetola.com]
+    /// Helper Class
+    /// @version: 1.0
+    /// @creator: Samson Oyetola [hello@samsonoyetola.com]
+    /// @repo: https://github.com/samtax01/ehex-dotnet-helper
     /// </summary>
     public static class HttpRequest
     {

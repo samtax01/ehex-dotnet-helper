@@ -7,9 +7,10 @@ namespace Ehex.Helpers
 {
 
     /// <summary>
+    /// Helper Class
     /// @version: 1.0
-    /// @by: Samson Oyetola [hello@samsonoyetola.com]
-    /// @repo: 
+    /// @creator: Samson Oyetola [hello@samsonoyetola.com]
+    /// @repo: https://github.com/samtax01/ehex-dotnet-helper
     /// </summary>
     
     public static class ApiException

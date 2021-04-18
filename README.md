@@ -2,7 +2,8 @@
 
 ### Simply copy to your project. Check each classes for the documentation.
 
+<hr/>
 
-
-@author: Samson Oyetola
-@email: hello@samsonoyetola.com
+Author: [Samson Oyetola](https://github.com/samtax01/ehex-dotnet-helper)
+<br/>
+Email: [hello@samsonoyetola.com]()

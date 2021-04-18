@@ -13,10 +13,11 @@ using Newtonsoft.Json.Serialization;
 // ReSharper disable once CheckNamespace
 namespace Ehex.Helpers
 {
-    
+    // Helper Class
     // ApiResponse serves as a response wrapper to guarantee a consistent Api response across the Application
-    // @version v1.0
-    // @author Samson Oyetola [hello@samsonoyetola.com]
+    // @version: 1.0
+    // @creator: Samson Oyetola [hello@samsonoyetola.com]
+    // @repo: https://github.com/samtax01/ehex-dotnet-helper
     // use case
     //      Add to swagger documentation annotation as
     //          [ProducesResponseType(typeof(ApiResponse<string>), 200)]
