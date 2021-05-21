@@ -1,6 +1,7 @@
 using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -36,6 +37,7 @@ namespace Ehex.Helpers
         public static HttpClient AddBasicAuth(string userName, string password, HttpClient httpClient = null)
         {
             httpClient ??= Client;
+            
             var authToken = Encoding.ASCII.GetBytes($"{userName}:{password}");
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(authToken));
             return httpClient;
@@ -61,15 +63,15 @@ namespace Ehex.Helpers
         /// <param name="requestData"></param>
         /// <param name="httpClient">optional as HttpService.Client</param>
         /// <returns>Returned HttpResponseMessage</returns>
-        public static async Task<HttpResponseMessage> Make(string url, HttpRequestType requestType = HttpRequestType.Get, HttpContent requestData = null, HttpClient httpClient = null)
+        public static async Task<HttpResponseMessage> Make(string url, HttpRequestType requestType = HttpRequestType.Get, object requestData = null, HttpClient httpClient = null)
         {
             try
             {
                 httpClient ??= Client;
                 var response = requestType switch
                 {
-                    HttpRequestType.Post => (await httpClient.PostAsync(url, requestData!)),
-                    HttpRequestType.Put => (await httpClient.PutAsync(url, requestData!)),
+                    HttpRequestType.Post => (await httpClient.PostAsJsonAsync(url, requestData!)),
+                    HttpRequestType.Put => (await httpClient.PutAsJsonAsync(url, requestData!)),
                     _ => httpClient.GetAsync(url).Result
                 };
                 return response;
