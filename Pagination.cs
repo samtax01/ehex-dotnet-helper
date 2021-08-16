@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 
 
 // ReSharper disable once CheckNamespace
@@ -116,6 +118,8 @@ namespace Ehex.Helpers
         /// <returns></returns>
         public static async Task<Pagination<T>> CreateAsync([ActionResultObjectValue] IQueryable<T> items, PaginationFilter paginationFilter, HttpContext request)
         {
+            if (items is null) 
+                return Build(new List<T>(), 0, paginationFilter, request);
             var pagedItems =   await items.Skip((paginationFilter.Page - 1) * paginationFilter.Limit).Take(paginationFilter.Limit).ToListAsync();
             var totalItems = await items.CountAsync();
             return Build(pagedItems, totalItems, paginationFilter, request);
@@ -130,6 +134,7 @@ namespace Ehex.Helpers
         /// <returns></returns>
         public static Pagination<T> Create([ActionResultObjectValue] IList<T> items, PaginationFilter paginationFilter, HttpContext request)
         {
+            items ??= new List<T>();
             var pagedItems = items.Skip((paginationFilter.Page - 1) * paginationFilter.Limit).Take(paginationFilter.Limit).ToList();
             return Build(pagedItems, items.Count, paginationFilter, request);
         }

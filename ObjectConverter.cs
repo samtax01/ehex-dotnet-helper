@@ -30,11 +30,24 @@ namespace Ehex.Helpers
                 var value = JsonConvert.SerializeObject(from);
                 return (typeof(T) == typeof(string)) ? (T) (object) value : JsonConvert.DeserializeObject<T>(value);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw new Exception($"Conversion failed: Unable to convert from Type {from.GetType().Name} to Type {typeof(T).Name}");
             }
         }
+        
+        
+        /// <summary>
+        /// Convert an object to a string
+        /// </summary>
+        public static string ToString(object from)
+        {
+            return To<string>(from);
+        }
+        
+        
+        
+        
     }
 
 

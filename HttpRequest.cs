@@ -92,8 +92,9 @@ namespace Ehex.Helpers
                         request.Headers.Add(key, value);
                 
                 // Add Request Data
-                request.Content = new StringContent(JsonSerializer.Serialize(requestData), Encoding.UTF8, "application/json");
-                
+                if (httpRequestMethod != HttpMethod.Get && requestData is not null)
+                    request.Content = new StringContent(requestData is string data ? data: JsonSerializer.Serialize(requestData), Encoding.UTF8, "application/json");
+
                 // Make httpClient and request
                 var client = clientFactory.CreateClient();
                 return await client.SendAsync(request);
@@ -141,10 +142,12 @@ namespace Ehex.Helpers
                 throw;
             }
         }
-        
-        
-        
-        
-        
+
+
+        public static bool IsUrlValid(string url)
+        {
+            return Uri.TryCreate(url, UriKind.Absolute, out var uriResult) &&  (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
+        }
+
     }
 }
